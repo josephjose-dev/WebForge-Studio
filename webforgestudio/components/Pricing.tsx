@@ -1,12 +1,8 @@
 "use client";
 
-import { useState } from "react";
 
-type Currency = "USD" | "INR";
 
 export default function Pricing() {
-  const [currency, setCurrency] = useState<Currency>("USD");
-
   const plans = [
     {
       name: "Landing Page Launch",
@@ -18,7 +14,6 @@ export default function Pricing() {
         "Contact / enquiry form connected to your email",
         "Delivery in 3–5 days after content is shared",
       ],
-      priceUSD: "From $149",
       priceINR: "From ₹4,999",
       popular: false,
     },
@@ -33,7 +28,6 @@ export default function Pricing() {
         "SEO-ready structure for your name/brand searches",
         "Delivery in 5–7 days after content is shared",
       ],
-      priceUSD: "From $299",
       priceINR: "From ₹8,999",
       popular: true,
     },
@@ -48,13 +42,10 @@ export default function Pricing() {
         "Optional WhatsApp/chat handoff after form submission",
         "Delivery timeline based on scope (usually 7–10 days)",
       ],
-      priceUSD: "From $499",
       priceINR: "From ₹14,999",
       popular: false,
     },
   ];
-
-  const isUSD = currency === "USD";
 
   return (
     <section id="pricing" className="py-20 bg-[#0f0f12]">
@@ -66,7 +57,7 @@ export default function Pricing() {
           </h2>
           <p className="text-xl text-white/70 max-w-2xl mx-auto">
             Transparent packages for startups, freelancers and small businesses.
-            Choose your currency and get a clear starting point.
+            Get a clear starting point for your project.
           </p>
           <p className="mt-3 text-sm text-white/50">
             30% advance to start • 70% on final delivery • 100% refund if you’re
@@ -74,48 +65,19 @@ export default function Pricing() {
           </p>
         </div>
 
-        {/* Currency Toggle */}
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex items-center rounded-full bg-white/5 p-1 border border-white/10">
-            <button
-              type="button"
-              onClick={() => setCurrency("USD")}
-              className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors ${
-                isUSD
-                  ? "bg-white text-black"
-                  : "text-white/70 hover:text-white"
-              }`}
-            >
-              USD Pricing
-            </button>
-            <button
-              type="button"
-              onClick={() => setCurrency("INR")}
-              className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors ${
-                !isUSD
-                  ? "bg-white text-black"
-                  : "text-white/70 hover:text-white"
-              }`}
-            >
-              INR Pricing
-            </button>
-          </div>
-        </div>
-
         {/* Plans */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {plans.map((plan) => {
-            const price = isUSD ? plan.priceUSD : plan.priceINR;
-            const currencyLabel = isUSD ? "USD" : "INR";
+            const price = plan.priceINR;
+            const currencyLabel = "INR";
 
             return (
               <div
                 key={plan.name}
-                className={`relative bg-black/40 backdrop-blur-xl rounded-2xl shadow-lg p-8 border ${
-                  plan.popular
-                    ? "border-purple-500/50 transform scale-105 glow-purple"
-                    : "border-white/10"
-                }`}
+                className={`relative bg-black/40 backdrop-blur-xl rounded-2xl shadow-lg p-8 border ${plan.popular
+                  ? "border-purple-500/50 transform scale-105 glow-purple"
+                  : "border-white/10"
+                  }`}
               >
                 {plan.popular && (
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -163,11 +125,10 @@ export default function Pricing() {
 
                 <button
                   type="button"
-                  className={`w-full py-3 px-6 rounded-lg font-semibold text-sm transition-colors ${
-                    plan.popular
-                      ? "bg-purple-500 text-white hover:bg-purple-600"
-                      : "bg-white/10 text-white hover:bg-white/20"
-                  }`}
+                  className={`w-full py-3 px-6 rounded-lg font-semibold text-sm transition-colors ${plan.popular
+                    ? "bg-purple-500 text-white hover:bg-purple-600"
+                    : "bg-white/10 text-white hover:bg-white/20"
+                    }`}
                   onClick={() => {
                     const contactSection = document.getElementById("contact");
                     if (contactSection) {
@@ -208,8 +169,7 @@ export default function Pricing() {
             the best option for your budget.
           </p>
           <p>
-            Payments via UPI / bank transfer for INR and via international
-            methods for USD clients. Invoice available on request.
+            Payments via UPI / bank transfer for INR. Invoice available on request.
           </p>
         </div>
       </div>
